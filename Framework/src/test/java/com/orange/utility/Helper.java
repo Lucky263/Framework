@@ -13,10 +13,11 @@ import org.openqa.selenium.io.FileHandler;
 
 public class Helper {
 	
-	public static void captureScreenshot(WebDriver driver, String name)
+	public static String captureScreenshot(WebDriver driver, String name)
 	{
 		File src = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-		File dest = new File("./Screenshots/Orange_"+name+"_"+getStringData()+".png");
+		String destPath ="./Screenshots/Orange_"+name+"_"+getCurrentDate()+".png";
+		File dest = new File(destPath);
 		try {
 			FileHandler.copy(src,dest);
 		} catch (Exception e) {
@@ -25,9 +26,10 @@ public class Helper {
 		}
 		
 		System.out.println("ScreenShot Captured");
+		return destPath;
 	}
 	
-	public static String getStringData()
+	public static String getCurrentDate()
 	{
 		DateFormat customformat = new SimpleDateFormat("MM_dd_yy_HH_mm_ss");
 		
